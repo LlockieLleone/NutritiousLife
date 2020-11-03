@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "199518062242",
+    "firebase_url": "https://nutritiouslifeproject.firebaseio.com",
+    "project_id": "nutritiouslifeproject",
+    "storage_bucket": "nutritiouslifeproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199518062242:android:ffc455ac5b579ebdabb9fb",
+        "android_client_info": {
+          "package_name": "com.example.nutritiouslife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199518062242-ck4phq8ss74mqss0khvtkoolqohtcs27.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nutritiouslife",
+            "certificate_hash": "88135f469ae606b2bb4e6e03daebb21bc985717d"
+          }
+        },
+        {
+          "client_id": "199518062242-mno9p86d226dt0b40c7m345kg3mfg7n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzHPvwSmlGDsbku15RVGsjvSoN9R4XPgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199518062242-mno9p86d226dt0b40c7m345kg3mfg7n7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
