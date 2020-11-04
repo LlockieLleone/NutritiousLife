@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Calculator">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculator"
+        android:textSize="30sp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        style="@style/titleStyle"
+        />
+
+    <TextView
+        android:id="@+id/textViewIntroduction"
+        style="@style/textViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="In this part, you can calculate the amount of water and Calories that you need for one day, according to your information enter below"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+    <TextView
+        android:id="@+id/textViewWeightForCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Weight"
+
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIntroduction"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextWeightForCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:text=""
+
+        app:layout_constraintTop_toTopOf="@id/textViewWeightForCalculate"
+        app:layout_constraintBottom_toBottomOf="@id/textViewWeightForCalculate"
+        app:layout_constraintLeft_toRightOf="@id/textViewWeightForCalculate"
+        android:layout_marginLeft="0dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KG"
+        android:textSize="20sp"
+
+        app:layout_constraintLeft_toRightOf="@id/editTextWeightForCalculate"
+        app:layout_constraintTop_toTopOf="@id/editTextWeightForCalculate"
+        app:layout_constraintBottom_toBottomOf="@id/editTextWeightForCalculate"
+
+        style="@style/textViewStyle"
+        />
+
+    <TextView
+        android:id="@+id/textViewIntensity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please choose you intensity of activity"
+
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWeightForCalculate"
+        app:layout_constraintStart_toStartOf="@id/textViewWeightForCalculate"
+        android:layout_marginTop="10dp"
+
+        style="@style/textViewStyle"
+        />
+
+    <RadioGroup
+        android:id="@+id/rgIntensity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewIntensity"
+        app:layout_constraintStart_toStartOf="@id/textViewIntensity" >
+
+        <RadioButton
+            android:id="@+id/rbHigh"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="High"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rbMedium"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="medium"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/tbLow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Low"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rgIntensity"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/textViewWaterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water"
+        android:textSize="30sp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCalculate"
+
+        style="@style/titleStyle"
+
+        />
+
+    <TextView
+        android:id="@+id/textViewWaterResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water Result Message"
+
+        app:layout_constraintStart_toStartOf="@id/textViewWeightForCalculate"
+        app:layout_constraintTop_toBottomOf="@id/textViewWaterTitle"
+
+        style="@style/textViewStyle"/>
+
+    <TextView
+        android:id="@+id/textViewCaloriesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories"
+        android:textSize="30sp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewWaterResult"
+
+        style="@style/titleStyle"
+        />
+
+    <TextView
+        android:id="@+id/textViewCaloriesResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories Result Message"
+
+        app:layout_constraintStart_toStartOf="@id/textViewWeightForCalculate"
+        app:layout_constraintTop_toBottomOf="@id/textViewCaloriesTitle"
+
+        style="@style/textViewStyle"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

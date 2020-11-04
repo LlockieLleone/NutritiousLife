@@ -206,8 +206,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        app:layout_constraintLeft_toLeftOf="@id/textViewTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewRePassword"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
         android:textAllCaps="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
