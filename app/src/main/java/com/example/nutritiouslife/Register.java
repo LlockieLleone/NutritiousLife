@@ -102,7 +102,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 editTextPassword.setText(null);
                 editTextRePassword.setText(null);
 
-                Intent intent = new Intent(this, Calculator.class);
+                Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
 
             }else{
