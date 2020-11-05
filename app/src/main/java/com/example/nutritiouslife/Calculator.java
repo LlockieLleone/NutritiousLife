@@ -41,6 +41,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
     private int height;
     private int age;
     private int weight;
+    private String weightFromHome;
 
     DatabaseReference userDatabase, userChild;
 
@@ -66,11 +67,6 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         textViewCaloriesResult = findViewById(R.id.textViewCaloriesResult);
         btnCalculate = findViewById(R.id.btnCalculate);
 
-        userId = getIntent().getStringExtra("schedule");
-
-        userDatabase = FirebaseDatabase.getInstance().getReference("user");
-
-
         rbLose.setOnClickListener(this);
         rbMaintain.setOnClickListener(this);
         rbGain.setOnClickListener(this);
@@ -79,17 +75,29 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         rbHigh.setOnClickListener(this);
         btnCalculate.setOnClickListener(this);
 
+        userId = getIntent().getStringExtra("id");
+        weightFromHome = getIntent().getStringExtra("weight");
+
+        Toast.makeText(this,
+                "data get from home is " + weightFromHome,
+                Toast.LENGTH_LONG).show();
+
+        editTextWeightForCalculate.setText(String.valueOf(weight));
+
+        userDatabase = FirebaseDatabase.getInstance().getReference("user");
+
         userChild = FirebaseDatabase.getInstance().getReference("user").child(String.valueOf(userId));
 
         userChild.addValueEventListener(this);
 
-        editTextWeightForCalculate.setText(weight);
+
     }
 
     private int calculateWaterVolume(String intensity) throws Exception{
         int volume = 0;
         if(editTextWeightForCalculate.getText().toString() != "") {
             weight = Integer.valueOf(editTextWeightForCalculate.getText().toString());
+
             if(intensity.equals("High")) {
                 volume = (weight * 50) - 1500;
                 //need to consider the calories intake(food),
@@ -110,10 +118,8 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     private int calculateCalories(String need) throws Exception{
         int cal = 0;
-
+        weight = Integer.valueOf(editTextWeightForCalculate.getText().toString());
         if(editTextWeightForCalculate.getText().toString() != "") {
-
-            weight = Integer.valueOf(editTextWeightForCalculate.getText().toString());
 
             if (need.equals("Lose")) {
                 cal = (int)((67 + (13.73 * weight) + (5 * height) - (6.9 * age)) * 1.1);
@@ -139,9 +145,14 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         if(dataSnapshot.exists()) {
-            height = Integer.valueOf(dataSnapshot.child("name").getValue().toString());
+
+            height = Integer.valueOf(dataSnapshot.child("height").getValue().toString());
             age =  Integer.valueOf(dataSnapshot.child("age").getValue().toString());
-            weight = Integer.valueOf(dataSnapshot.child("weight").getValue().toString());
+
+        }else{
+            Toast.makeText(this,
+                    "Fail to find data from database",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -149,7 +160,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         try
         {
             waterVolume = calculateWaterVolume(intensity);
-            textViewWaterResult.setText(waterVolume + " ml water");
+            textViewWaterResult.setText(waterVolume + "ml water");
         }
         catch(Exception e)
         {
@@ -161,7 +172,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         try
         {
             caloriesAmount = calculateCalories(need);
-            textViewCaloriesResult.setText(caloriesAmount + " cal food");
+            textViewCaloriesResult.setText(caloriesAmount + "cal food");
         }
         catch(Exception e)
         {
