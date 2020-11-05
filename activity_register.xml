@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/titleStyle"/>
+
+    <TextView
+        android:id="@+id/textViewId"
+        style="@style/textViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="5dp"
+        android:text="ID"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+    <EditText
+        android:id="@+id/editTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@id/textViewId"
+        app:layout_constraintLeft_toRightOf="@id/textViewId"
+        app:layout_constraintTop_toTopOf="@id/textViewId" />
+
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewId"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewEmail"
+        app:layout_constraintBottom_toBottomOf="@id/textViewEmail"
+        app:layout_constraintLeft_toRightOf="@id/textViewEmail"
+        android:layout_marginLeft="10dp"  />
+
+    <TextView
+        android:id="@+id/textViewFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewFirstName"
+        app:layout_constraintBottom_toBottomOf="@id/textViewFirstName"
+        app:layout_constraintLeft_toRightOf="@id/textViewFirstName"
+        android:layout_marginLeft="10dp"  />
+
+    <TextView
+        android:id="@+id/textViewLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewLastName"
+        app:layout_constraintBottom_toBottomOf="@id/textViewLastName"
+        app:layout_constraintLeft_toRightOf="@id/textViewLastName"
+        android:layout_marginLeft="10dp"  />
+
+    <TextView
+        android:id="@+id/textViewAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLastName"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewAge"
+        app:layout_constraintBottom_toBottomOf="@id/textViewAge"
+        app:layout_constraintLeft_toRightOf="@id/textViewAge"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/textViewWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAge"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewWeight"
+        app:layout_constraintBottom_toBottomOf="@id/textViewWeight"
+        app:layout_constraintLeft_toRightOf="@id/textViewWeight"
+        android:layout_marginLeft="10dp"  />
+
+    <TextView
+        android:id="@+id/textViewHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWeight"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewHeight"
+        app:layout_constraintBottom_toBottomOf="@id/textViewHeight"
+        app:layout_constraintLeft_toRightOf="@id/textViewHeight"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/textViewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextHeight"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewPassword"
+        app:layout_constraintBottom_toBottomOf="@id/textViewPassword"
+        app:layout_constraintLeft_toRightOf="@id/textViewPassword"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/textViewRePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Re-enter Password"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        style="@style/textViewStyle"/>
+
+    <EditText
+        android:id="@+id/editTextRePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewRePassword"
+        app:layout_constraintBottom_toBottomOf="@id/textViewRePassword"
+        app:layout_constraintLeft_toRightOf="@id/textViewRePassword"
+        android:layout_marginLeft="10dp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewRePassword"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:textAllCaps="false"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
