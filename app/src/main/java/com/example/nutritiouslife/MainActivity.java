@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (dataSnapshot.exists()){
             Toast.makeText(this, "Login successfully", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, Home.class);
+            intent.putExtra("id", editTextId.getText().toString().trim());
             startActivity(intent);
         }
     }

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 public class Home extends AppCompatActivity implements View.OnClickListener{
     Button btnLogout, btnCalculator;
+    String userId = "id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private void initialize() {
         btnLogout = findViewById(R.id.btnLogout);
         btnCalculator = findViewById(R.id.btnCalculator);
+        userId = getIntent().getStringExtra("schedule");
     }
 
     @Override
@@ -38,6 +40,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void calculator() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Calculator.class);
+        intent.putExtra("id", userId);
+        startActivity(intent);
     }
 }
