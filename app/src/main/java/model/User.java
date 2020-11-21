@@ -1,5 +1,8 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
     private int id;
     private String email;
@@ -9,6 +12,8 @@ public class User {
     private int weight;
     private int height;
     private String password;
+    private String foodname;
+    private double kcal;
 
 
     public User(String email, String password) {
@@ -25,7 +30,20 @@ public class User {
         this.age = age;
         this.weight = weight;
         this.height = height;
+    }
 
+
+    public User(String foodname, float kcal) {
+        this.foodname = foodname;
+        this.kcal = kcal;
+    }
+
+
+    public Map<String, Object> toMapLogFood() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", foodname);
+        result.put("kcal", kcal);
+        return result;
     }
 
     public User(String id, String email, String firstname, String lastname, int age, int weight, int height, String password) {
@@ -95,5 +113,20 @@ public class User {
         this.password = password;
     }
 
+    public String getFoodname() {
+        return foodname;
+    }
+
+    public void setFoodname(String foodname) {
+        this.foodname = foodname;
+    }
+
+    public double getKcal() {
+        return kcal;
+    }
+
+    public void setKcal(double kcal) {
+        this.kcal = kcal;
+    }
 }
 

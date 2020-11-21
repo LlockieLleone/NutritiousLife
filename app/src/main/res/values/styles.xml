@@ -13,4 +13,21 @@
         <item name="android:gravity">center</item>
         <item name="android:padding">5dp</item>
     </style>
+    <style name="headStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#3F51B5</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/table_border</item>
+    </style>
+
+    <style name="dataStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#3F51B5</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:gravity">left</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/table_border</item>
+    </style>
 </resources>

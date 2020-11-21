@@ -31,4 +31,161 @@
 
         android:textAllCaps="false"
         android:onClick="onClick" />
+
+    <TableLayout
+        android:id="@+id/tableLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:padding="20dp"
+        android:stretchColumns="2"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/btnCalculator"
+        app:layout_constraintLeft_toLeftOf="@+id/btnCalculator"
+        >
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=" Breakfast "
+                style="@style/headStyle"
+                />
+
+            <TextView
+                android:id="@+id/textViewBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_span="2"
+                style="@style/dataStyle"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=" Lunch "
+                style="@style/headStyle"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_span="2"
+                style="@style/dataStyle"
+                />
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=" Dinner "
+                style="@style/headStyle"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_span="2"
+                style="@style/dataStyle"
+                />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tableLog"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="30dp"
+        android:text="Please select time you want to log food!" />
+
+    <RadioGroup
+        android:id="@+id/rgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        >
+
+        <RadioButton
+            android:id="@+id/rbBreakfast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Breakfast"
+            android:onClick="onClick"
+            />
+
+        <RadioButton
+            android:id="@+id/rbLunch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lunch"
+            android:onClick="onClick"
+            />
+
+        <RadioButton
+            android:id="@+id/rbDinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dinner"
+            android:onClick="onClick"
+            />
+
+    </RadioGroup>
+    <EditText
+        android:id="@+id/editTextSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@id/rgTime"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="30dp" />
+
+    <Button
+        android:id="@+id/btnAddSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        app:layout_constraintTop_toBottomOf="@+id/rgTime"
+        app:layout_constraintLeft_toRightOf="@+id/editTextSearch"
+        android:onClick="onClick"
+        />
+
+    <ListView
+        android:id="@+id/listViewSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#ad5"
+        android:dividerHeight="2dp"
+        android:layout_below="@+id/editTextSearch"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
