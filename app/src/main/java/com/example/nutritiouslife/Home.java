@@ -41,7 +41,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
     Button btnLogout, btnCalculator, btnAddSearch;
     String userId = "";
     private int weight;
-    ListView listViewSearch;
     EditText editTextSearch;
     TextView textViewBreakfast;
     RadioButton rbBreakfast, rbLunch, rbDinner;
@@ -67,7 +66,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
         rbDinner = findViewById(R.id.rbDinner);
 
         editTextSearch = findViewById(R.id.editTextSearch);
-        listViewSearch = findViewById(R.id.listViewSearch);
 
         textViewBreakfast = findViewById(R.id.textViewBreakfast);
 

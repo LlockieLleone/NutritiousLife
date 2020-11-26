@@ -26,7 +26,7 @@
         android:text="Calculator"
 
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginLeft="10dp"
 
         android:textAllCaps="false"
@@ -36,12 +36,12 @@
         android:id="@+id/tableLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:padding="20dp"
         android:stretchColumns="2"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/btnCalculator"
-        app:layout_constraintLeft_toLeftOf="@+id/btnCalculator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         >
         <TableRow
             android:layout_width="fill_parent"
@@ -122,8 +122,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tableLog"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="30dp"
-        android:text="Please select time you want to log food!" />
+        android:layout_marginLeft="20dp"
+
+        android:textSize="15sp"
+
+        android:text="Please select time you want to log food!"
+
+        style="@style/textViewStyle"
+        />
 
     <RadioGroup
         android:id="@+id/rgTime"
@@ -137,7 +143,8 @@
         <RadioButton
             android:id="@+id/rbBreakfast"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+
             android:text="Breakfast"
             android:onClick="onClick"
             />
@@ -145,7 +152,7 @@
         <RadioButton
             android:id="@+id/rbLunch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:text="Lunch"
             android:onClick="onClick"
             />
@@ -153,39 +160,143 @@
         <RadioButton
             android:id="@+id/rbDinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:text="Dinner"
             android:onClick="onClick"
             />
 
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewSearchFoodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter food name to search in database"
+
+        android:textSize="15sp"
+
+        app:layout_constraintTop_toBottomOf="@id/rgTime"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+
+        style="@style/textViewStyle"
+        />
+
     <EditText
         android:id="@+id/editTextSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="6"
         android:text=""
-        app:layout_constraintTop_toBottomOf="@id/rgTime"
+        app:layout_constraintTop_toBottomOf="@id/textViewSearchFoodName"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="20dp" />
 
     <Button
         android:id="@+id/btnAddSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        app:layout_constraintTop_toBottomOf="@+id/rgTime"
+        android:text="Search and add to log"
+        app:layout_constraintTop_toTopOf="@+id/editTextSearch"
         app:layout_constraintLeft_toRightOf="@+id/editTextSearch"
+
+        android:layout_marginLeft="10dp"
+
         android:onClick="onClick"
         />
 
-    <ListView
-        android:id="@+id/listViewSearch"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#ad5"
-        android:dividerHeight="2dp"
-        android:layout_below="@+id/editTextSearch"
+    <TextView
+        android:id="@+id/textViewEnterFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Or you can create your food kind!"
+
+        android:textSize="15sp"
+
+        app:layout_constraintTop_toBottomOf="@id/editTextSearch"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+
+        style="@style/textViewStyle"
         />
+
+    <TextView
+        android:id="@+id/textViewEnterFoodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Name:"
+
+        android:textSize="15sp"
+
+        app:layout_constraintTop_toBottomOf="@id/textViewEnterFood"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+
+        style="@style/textViewStyle"
+        />
+
+    <EditText
+        android:id="@+id/editTextFoodNameByUser"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewEnterFoodName"
+        app:layout_constraintLeft_toRightOf="@id/textViewEnterFoodName"
+        app:layout_constraintBottom_toBottomOf="@id/textViewEnterFoodName"
+
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/textViewEnterFoodCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories:"
+
+        android:textSize="15sp"
+
+        app:layout_constraintTop_toBottomOf="@id/textViewEnterFoodName"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+
+        style="@style/textViewStyle"
+        />
+
+    <EditText
+        android:id="@+id/editTextCaloriesByUser"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:ems="6"
+        android:text=""
+        app:layout_constraintTop_toTopOf="@id/textViewEnterFoodCalories"
+        app:layout_constraintLeft_toRightOf="@id/textViewEnterFoodCalories"
+        app:layout_constraintBottom_toBottomOf="@id/textViewEnterFoodCalories"
+
+
+        android:layout_marginLeft="20dp" />
+
+    <Button
+        android:id="@+id/btnAddManual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create and add to log"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnterFoodCalories"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextSearch"
+
+        android:layout_marginTop="10dp"
+
+        android:onClick="onClick"
+        />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
