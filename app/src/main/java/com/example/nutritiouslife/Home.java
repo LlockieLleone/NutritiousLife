@@ -38,10 +38,10 @@ import model.User;
 import static android.widget.Toast.LENGTH_LONG;
 
 public class Home extends AppCompatActivity implements View.OnClickListener, ValueEventListener {
-    Button btnLogout, btnCalculator, btnAddSearch;
+    Button btnLogout, btnCalculator, btnAddSearch, btnAddManual;
     String userId = "";
     private int weight;
-    EditText editTextSearch;
+    EditText editTextSearch, editTextFoodNameByUser, editTextCaloriesByUser;
     TextView textViewBreakfast;
     RadioButton rbBreakfast, rbLunch, rbDinner;
     String selection = "";
@@ -74,6 +74,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
         userDatabase = FirebaseDatabase.getInstance().getReference("user");
         foodDatabase = FirebaseDatabase.getInstance().getReference("food");
 
+        //Manual enter food
+        btnAddManual = findViewById(R.id.btnAddManual);
+        editTextFoodNameByUser = findViewById(R.id.editTextFoodNameByUser);
+        editTextCaloriesByUser = findViewById(R.id.editTextCaloriesByUser);
     }
 
     @Override
@@ -120,11 +124,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
 
             Intent intent = new Intent(this, Calculator.class);
             intent.putExtra("id", userId);
-            intent.putExtra("80", weight);
-
-            Toast.makeText(this,
-                    "data before send is " + weight,
-                    LENGTH_LONG).show();
+            intent.putExtra("weight", String.valueOf(weight));
+            //!! here is a get String Extra, always put a String type in intent, other wise it will not send the value(which is null)
 
             startActivity(intent);
         } else {
@@ -190,4 +191,17 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
         });
     }
 
+    private Food createFood(){
+        /**
+         * This method returns a Food object which contains food information entered by user.
+         * @param non.
+         * @return Food object.
+         */
+
+        Food food = new Food();
+        food.setName(editTextFoodNameByUser.getText().toString());
+        food.setKcal(Float.valueOf(editTextCaloriesByUser.getText().toString()));
+
+        return food;
+    }
 }

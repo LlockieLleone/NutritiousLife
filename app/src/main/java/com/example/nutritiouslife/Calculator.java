@@ -77,10 +77,8 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
         userId = getIntent().getStringExtra("id");
         weightFromHome = getIntent().getStringExtra("weight");
+        //!! here is a get String Extra, always put a String type in intent, other wise it will not send the value(which is null)
 
-        Toast.makeText(this,
-                "data get from home is " + weightFromHome,
-                Toast.LENGTH_LONG).show();
 
         editTextWeightForCalculate.setText(String.valueOf(weight));
 
@@ -90,7 +88,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
         userChild.addValueEventListener(this);
 
-
+        editTextWeightForCalculate.setText(weightFromHome);
     }
 
     private int calculateWaterVolume(String intensity) throws Exception{
