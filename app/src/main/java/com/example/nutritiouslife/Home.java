@@ -139,6 +139,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
     public void onCancelled(@NonNull DatabaseError databaseError) {
 
     }
+    //THE KCAL WITH FLOAT VALUE CANNOT BE ADD INTO FOOD LOG
     private void searchFood() {
         String inputFoodName = editTextSearch.getText().toString();
         foodChild = FirebaseDatabase.getInstance().getReference("food").child(inputFoodName);
@@ -159,32 +160,28 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
                     userDatabase.child(userId).child("foodlog")
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(logFoodUpdate);
-                                    textViewBreakfast.append(foodname+"\n"+kcal);
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                                {
 
-                                    //I CANNOT SELECT THE RADIO BUTTON YET
-                                    //THE KCAL WITH FLOAT VALUE CANNOT BE ADD INTO FOOD LOG
-                                    //Activity reloads automatically after press Add(search)
-
-//                        if(selection.equals("Breakfast")){
-//                            userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(logFoodUpdate);
-//                        }
-//                        else if(selection.equals("Lunch")){
-//                            userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(logFoodUpdate);
-//                        }
-//                        else if(selection.equals("Dinner")){
-//                            userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(logFoodUpdate);
-//                        }
-
+                                    if(selection.equals("Breakfast")){
+                                        userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(logFoodUpdate);
+                                        textViewBreakfast.append(foodname+"\n"+kcal);                                    }
+                                    else if(selection.equals("Lunch")){
+                                        userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(logFoodUpdate);
+                                        textViewBreakfast.append(foodname+"\n"+kcal);
+                                    }
+                                    else if(selection.equals("Dinner")){
+                                        userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(logFoodUpdate);
+                                        textViewBreakfast.append(foodname+"\n"+kcal);
+                                    }
                                 }
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
                                 }
                             });
                 }
             }
+
             @Override
             public void onCancelled (@NonNull DatabaseError databaseError){
             }
