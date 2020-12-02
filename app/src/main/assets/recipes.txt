@@ -1,0 +1,9 @@
+Boiled egg,155 Cal per 100 grams,egg
+Apple,52 Cal per 100 grams,apple
+Avocado,250 Cal per 23 grams total fat,avocado
+Beefsteak,134 Cal per 100 grams,beefsteak
+Broccoil,34 Cal per 100 grams,broccoil
+Chicken,239 Cal per 100 grams,chicken
+Pork,242 Cal per 100 grams,pork
+Rice,130 Cal per 100 grams,rice
+
