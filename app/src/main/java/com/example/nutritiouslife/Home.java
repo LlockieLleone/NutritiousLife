@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +38,7 @@ import model.User;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class Home extends AppCompatActivity implements View.OnClickListener, ValueEventListener {
+public class Home extends AppCompatActivity implements View.OnClickListener{
     Button btnLogout, btnCalculator, btnAddSearch, btnAddManual;
     String userId = "";
     private int weight;
@@ -45,9 +46,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
     TextView textViewBreakfast;
     RadioButton rbBreakfast, rbLunch, rbDinner;
     String selection = "";
+    Context HomeContext = this;
 
 
-    DatabaseReference userDatabase, userChild, foodDatabase, foodChild;
+    DatabaseReference userDatabase, userChild, foodDatabase, SpecificfoodChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +104,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
             case R.id.btnAddSearch:
                 searchFood();
                 break;
+            case R.id.btnAddManual:
+                createFood();
+                break;
         }
     }
 
@@ -113,43 +118,54 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
 
     private void calculator() {
         userChild = FirebaseDatabase.getInstance().getReference("user").child(String.valueOf(userId));
-        userChild.addValueEventListener(this);
-    }
 
-    @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        if (dataSnapshot.exists()) {
+        ValueEventListener FoodListener = new ValueEventListener() {
 
-            weight = Integer.valueOf(dataSnapshot.child("weight").getValue().toString());
-
-            Intent intent = new Intent(this, Calculator.class);
-            intent.putExtra("id", userId);
-            intent.putExtra("weight", String.valueOf(weight));
-            //!! here is a get String Extra, always put a String type in intent, other wise it will not send the value(which is null)
-
-            startActivity(intent);
-        } else {
-            Toast.makeText(this,
-                    "Fail to find user data from database",
-                    LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-    }
-    //THE KCAL WITH FLOAT VALUE CANNOT BE ADD INTO FOOD LOG
-    private void searchFood() {
-        String inputFoodName = editTextSearch.getText().toString();
-        foodChild = FirebaseDatabase.getInstance().getReference("food").child(inputFoodName);
-        foodChild.orderByChild("name").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    weight = Integer.valueOf(dataSnapshot.child("weight").getValue().toString());
+
+                    Intent intent = new Intent(HomeContext, Calculator.class);
+                    intent.putExtra("id", userId);
+                    intent.putExtra("weight", String.valueOf(weight));
+                    //!! here is a get String Extra, always put a String type in intent, other wise it will not send the value(which is null)
+
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(HomeContext,
+                            "Fail to find user data from database",
+                            LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        };
+
+        userChild.addValueEventListener(FoodListener);
+    }
+
+    private void searchFood() {
+
+        String inputFoodName = editTextSearch.getText().toString();
+
+        SpecificfoodChild = FirebaseDatabase.getInstance().getReference("food").child(inputFoodName);
+
+        ValueEventListener FoodListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 if (dataSnapshot.exists()) {
                     String foodname = dataSnapshot.child("name").getValue().toString();
                     String kcal = dataSnapshot.child("kcal").getValue().toString();
 
+                    //create a reference to an auto-generated child location, and get the key value
                     String key = userDatabase.child("logfood").push().getKey();
                     User user = new User(foodname, kcal);
                     Map<String, Object> logFoodValues = user.toMapLogFood();
@@ -157,48 +173,83 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Val
                     Map<String, Object> logFoodUpdate = new HashMap<>();
                     logFoodUpdate.put("foodname " + foodname, logFoodValues);
                     logFoodUpdate.put("kcal " + kcal, logFoodValues);
+
+
                     userDatabase.child(userId).child("foodlog")
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-                                {
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                    if(selection.equals("Breakfast")){
+                                    if (selection.equals("Breakfast")) {
                                         userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(logFoodUpdate);
-                                        textViewBreakfast.append(foodname+"\n"+kcal);                                    }
-                                    else if(selection.equals("Lunch")){
+                                        textViewBreakfast.append(foodname + "\n" + kcal);
+                                    } else if (selection.equals("Lunch")) {
                                         userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(logFoodUpdate);
-                                        textViewBreakfast.append(foodname+"\n"+kcal);
-                                    }
-                                    else if(selection.equals("Dinner")){
+                                        textViewBreakfast.append(foodname + "\n" + kcal);
+                                    } else if (selection.equals("Dinner")) {
                                         userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(logFoodUpdate);
-                                        textViewBreakfast.append(foodname+"\n"+kcal);
+                                        textViewBreakfast.append(foodname + "\n" + kcal);
                                     }
                                 }
+
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                 }
                             });
+
                 }
             }
 
             @Override
-            public void onCancelled (@NonNull DatabaseError databaseError){
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
-        });
+        };
+
+        SpecificfoodChild.orderByChild("name").addListenerForSingleValueEvent(FoodListener);
     }
 
-    private Food createFood(){
+    //THE KCAL WITH FLOAT VALUE CANNOT BE ADD INTO FOOD LOG
+
+
+    private void createFood(){
         /**
-         * This method returns a Food object which contains food information entered by user.
+         * This method create a Food object which contains food information entered by user.
+         * After create Food object, save data to firebase
          * @param non.
-         * @return Food object.
+         * @return non.
          */
 
-        Food food = new Food();
-        food.setName(editTextFoodNameByUser.getText().toString());
-        food.setKcal(Float.valueOf(editTextCaloriesByUser.getText().toString()));
+        try{
 
-        return food;
+            //create food object
+            Food food = new Food();
+
+            //set value to object from ui EditText
+            food.setName(editTextFoodNameByUser.getText().toString());
+            food.setKcal(Float.valueOf(editTextCaloriesByUser.getText().toString()));
+
+            //add the object food to the collection food
+            foodDatabase.child(food.getName()).setValue(food);
+
+            //display the message to user
+            Toast.makeText(this,
+                    food.getName() + " is added successfully to the database",
+                    Toast.LENGTH_LONG).show();
+
+
+            editTextFoodNameByUser.setText(null);
+            editTextCaloriesByUser.setText(null);
+            editTextSearch.requestFocus();
+
+        }catch (Exception e){
+            Toast.makeText(this,
+                    "Ops, something went wrong",
+                    Toast.LENGTH_LONG).show();
+
+            Log.d("FIREBASE","Unable to complete action, error message: " + e.getMessage());
+
+        }
     }
 }
