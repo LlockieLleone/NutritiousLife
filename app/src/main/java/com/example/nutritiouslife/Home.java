@@ -48,7 +48,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     String selection = "";
     Context HomeContext = this;
 
-    String TotalFood;
+    String TotalBreakfast, TotalLunch, TotalDinner;
 
 
     DatabaseReference userDatabase, userChild, foodDatabase, SpecificfoodChild;
@@ -112,15 +112,29 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                 createFood();
                 break;
             case R.id.textViewBreakfast:
+                ShowDetailList("breakfast");
+                break;
+            case R.id.textViewLunch:
+                ShowDetailList("lunch");
+                break;
+            case R.id.textViewDinner:
+                ShowDetailList("dinner");
+                break;
 
         }
     }
 
-    private void ShowDetailList(){
+    private void ShowDetailList(String time){
 
         Intent intent = new Intent(HomeContext, Calculator.class);
-        intent.putExtra("foodname", TotalFood);
-        //!! here is a get String Extra, always put a String type in intent, other wise it will not send the value(which is null)
+
+        if(time == "breakfast"){
+            intent.putExtra("foodname", TotalBreakfast);
+        }else if(time == "lunch"){
+            intent.putExtra("foodname", TotalLunch);
+        }else{
+            intent.putExtra("foodname", TotalDinner);
+        }
 
         startActivity(intent);
     }
@@ -198,15 +212,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                                     if (selection.equals("Breakfast")) {
                                         userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(tmpFood);
                                         textViewBreakfast.append(foodname + "\n" + kcal);
-                                        TotalFood += foodname + ",";
+                                        TotalBreakfast += foodname + ",";
                                     } else if (selection.equals("Lunch")) {
                                         userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(tmpFood);
                                         textViewLunch.append(foodname + "\n" + kcal);
-                                        TotalFood += foodname + ",";
+                                        TotalLunch += foodname + ",";
                                     } else if (selection.equals("Dinner")) {
                                         userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(tmpFood);
                                         textViewDinner.append(foodname + "\n" + kcal);
-                                        TotalFood += foodname + ",";
+                                        TotalDinner += foodname + ",";
                                     }
                                 }
 
@@ -266,15 +280,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             if (selection.equals("Breakfast")) {
                 userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(food);
                 textViewBreakfast.append(food.getName() + "\n" + food.getKcal());
-                TotalFood += food.getName() + ",";
+                TotalBreakfast += food.getName() + ",";
             } else if (selection.equals("Lunch")) {
                 userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(food);
                 textViewLunch.append(food.getName() + "\n" + food.getKcal());
-                TotalFood += food.getName() + ",";
+                TotalLunch += food.getName() + ",";
             } else if (selection.equals("Dinner")) {
                 userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(food);
                 textViewDinner.append(food.getName() + "\n" + food.getKcal());
-                TotalFood += food.getName() + ",";
+                TotalDinner += food.getName() + ",";
             }
 
         }catch (Exception e){
