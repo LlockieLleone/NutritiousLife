@@ -48,6 +48,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     String selection = "";
     Context HomeContext = this;
 
+    String TotalFood;
+
 
     DatabaseReference userDatabase, userChild, foodDatabase, SpecificfoodChild;
 
@@ -109,7 +111,18 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             case R.id.btnAddManual:
                 createFood();
                 break;
+            case R.id.textViewBreakfast:
+
         }
+    }
+
+    private void ShowDetailList(){
+
+        Intent intent = new Intent(HomeContext, Calculator.class);
+        intent.putExtra("foodname", TotalFood);
+        //!! here is a get String Extra, always put a String type in intent, other wise it will not send the value(which is null)
+
+        startActivity(intent);
     }
 
 
@@ -185,12 +198,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                                     if (selection.equals("Breakfast")) {
                                         userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(tmpFood);
                                         textViewBreakfast.append(foodname + "\n" + kcal);
+                                        TotalFood += foodname + ",";
                                     } else if (selection.equals("Lunch")) {
                                         userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(tmpFood);
                                         textViewLunch.append(foodname + "\n" + kcal);
+                                        TotalFood += foodname + ",";
                                     } else if (selection.equals("Dinner")) {
                                         userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(tmpFood);
                                         textViewDinner.append(foodname + "\n" + kcal);
+                                        TotalFood += foodname + ",";
                                     }
                                 }
 
@@ -250,12 +266,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             if (selection.equals("Breakfast")) {
                 userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(food);
                 textViewBreakfast.append(food.getName() + "\n" + food.getKcal());
+                TotalFood += food.getName() + ",";
             } else if (selection.equals("Lunch")) {
                 userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(food);
                 textViewLunch.append(food.getName() + "\n" + food.getKcal());
+                TotalFood += food.getName() + ",";
             } else if (selection.equals("Dinner")) {
                 userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(food);
                 textViewDinner.append(food.getName() + "\n" + food.getKcal());
+                TotalFood += food.getName() + ",";
             }
 
         }catch (Exception e){

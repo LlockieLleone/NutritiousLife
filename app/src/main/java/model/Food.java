@@ -8,14 +8,23 @@ import java.util.HashMap;
 public class Food {
     private String name;
     private Float kcal;
+    private String photo;
 
-    public Food(String name, Float kcal) {
+    public Food(String name, Float kcal, String photo) {
+        this.name = name;
+        this.kcal = kcal;
+        this.photo = photo;
+    }
+
+    public Food(String name, Float kcal){
         this.name = name;
         this.kcal = kcal;
     }
+
     public Food() {
         this.name = name;
         this.kcal = kcal;
+        this.photo = photo;
     }
 
     @Override
@@ -39,6 +48,13 @@ public class Food {
         this.kcal = kcal;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
 }
 
