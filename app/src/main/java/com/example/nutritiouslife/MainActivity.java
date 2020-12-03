@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, Home.class);
             intent.putExtra("id", editTextId.getText().toString().trim());
             startActivity(intent);
+
+
         }
     }
 

@@ -7,9 +7,9 @@ import java.util.HashMap;
 
 public class Food {
     private String name;
-    private double kcal;
+    private Float kcal;
 
-    public Food(String name, double kcal) {
+    public Food(String name, Float kcal) {
         this.name = name;
         this.kcal = kcal;
     }
@@ -35,7 +35,7 @@ public class Food {
         return kcal;
     }
 
-    public void setKcal(double kcal) {
+    public void setKcal(Float kcal) {
         this.kcal = kcal;
     }
 

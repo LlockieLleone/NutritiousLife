@@ -43,7 +43,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     String userId = "";
     private int weight;
     EditText editTextSearch, editTextFoodNameByUser, editTextCaloriesByUser;
-    TextView textViewBreakfast;
+    TextView textViewBreakfast, textViewLunch, textViewDinner;
     RadioButton rbBreakfast, rbLunch, rbDinner;
     String selection = "";
     Context HomeContext = this;
@@ -70,6 +70,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         editTextSearch = findViewById(R.id.editTextSearch);
 
         textViewBreakfast = findViewById(R.id.textViewBreakfast);
+        textViewDinner = findViewById(R.id.textViewDinner);
+        textViewLunch = findViewById(R.id.textViewLunch);
 
         userId = getIntent().getStringExtra("id");
 
@@ -167,12 +169,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
                     //create a reference to an auto-generated child location, and get the key value
                     String key = userDatabase.child("logfood").push().getKey();
-                    User user = new User(foodname, kcal);
-                    Map<String, Object> logFoodValues = user.toMapLogFood();
 
-                    Map<String, Object> logFoodUpdate = new HashMap<>();
-                    logFoodUpdate.put("foodname " + foodname, logFoodValues);
-                    logFoodUpdate.put("kcal " + kcal, logFoodValues);
+                    Food tmpFood = new Food();
+                    tmpFood.setKcal(Float.valueOf(kcal));
+                    tmpFood.setName(foodname);
+
+
 
 
                     userDatabase.child(userId).child("foodlog")
@@ -181,14 +183,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                     if (selection.equals("Breakfast")) {
-                                        userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(logFoodUpdate);
+                                        userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(tmpFood);
                                         textViewBreakfast.append(foodname + "\n" + kcal);
                                     } else if (selection.equals("Lunch")) {
-                                        userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(logFoodUpdate);
-                                        textViewBreakfast.append(foodname + "\n" + kcal);
+                                        userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(tmpFood);
+                                        textViewLunch.append(foodname + "\n" + kcal);
                                     } else if (selection.equals("Dinner")) {
-                                        userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(logFoodUpdate);
-                                        textViewBreakfast.append(foodname + "\n" + kcal);
+                                        userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(tmpFood);
+                                        textViewDinner.append(foodname + "\n" + kcal);
                                     }
                                 }
 
@@ -242,6 +244,19 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             editTextFoodNameByUser.setText(null);
             editTextCaloriesByUser.setText(null);
             editTextSearch.requestFocus();
+
+            String key = userDatabase.child("logfood").push().getKey();
+
+            if (selection.equals("Breakfast")) {
+                userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(food);
+                textViewBreakfast.append(food.getName() + "\n" + food.getKcal());
+            } else if (selection.equals("Lunch")) {
+                userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(food);
+                textViewLunch.append(food.getName() + "\n" + food.getKcal());
+            } else if (selection.equals("Dinner")) {
+                userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(food);
+                textViewDinner.append(food.getName() + "\n" + food.getKcal());
+            }
 
         }catch (Exception e){
             Toast.makeText(this,

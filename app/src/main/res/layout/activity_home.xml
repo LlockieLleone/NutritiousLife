@@ -80,6 +80,7 @@
                 />
 
             <TextView
+                android:id="@+id/textViewLunch"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -105,6 +106,7 @@
                 />
 
             <TextView
+                android:id="@+id/textViewDinner"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
