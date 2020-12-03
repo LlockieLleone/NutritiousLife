@@ -2,6 +2,7 @@ package com.example.nutritiouslife;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,8 @@ public class Recipe extends AppCompatActivity implements AdapterView.OnItemClick
     String[] foodlistsplit;
 
     DatabaseReference RefFoodDatabase,RefFoodChild;
+
+    Context HomeContext = this;
 
 
     @Override
@@ -70,8 +73,6 @@ public class Recipe extends AppCompatActivity implements AdapterView.OnItemClick
 
         foodlistsplit = foodlist.split(",");
 
-
-
         ValueEventListener FoodListener = new ValueEventListener() {
 
             @Override
@@ -85,11 +86,14 @@ public class Recipe extends AppCompatActivity implements AdapterView.OnItemClick
 
                     RefFoodChild = RefFoodDatabase.child(name);
 
-                    food.setName(dataSnapshot.child(name).child("name").getValue().toString());
-                    food.setKcal(Float.valueOf(dataSnapshot.child(name).child("kcal").getValue().toString()));
-                    food.setPhoto(dataSnapshot.child(name).child("photo").getValue().toString());
+                    Toast.makeText(HomeContext, name, Toast.LENGTH_LONG).show();
 
-                    FoodArrayList.set(i, food);
+                    if(dataSnapshot.exists()) {
+                        food.setName(dataSnapshot.child(name).child("name").getValue().toString());
+                        food.setKcal(Float.valueOf(dataSnapshot.child(name).child("kcal").getValue().toString()));
+                        food.setPhoto(dataSnapshot.child(name).child("photo").getValue().toString());
+                    }
+                    FoodArrayList.add(food);
                 }
             }
 
@@ -100,7 +104,7 @@ public class Recipe extends AppCompatActivity implements AdapterView.OnItemClick
 
         };
 
-        RefFoodDatabase.addListenerForSingleValueEvent(FoodListener);
+        RefFoodDatabase.addValueEventListener(FoodListener);
 
         return FoodArrayList;
     }

@@ -62,6 +62,8 @@
                 android:gravity="center"
                 android:layout_span="2"
                 style="@style/dataStyle"
+
+                android:clickable="true"
                 />
         </TableRow>
 
@@ -86,6 +88,8 @@
                 android:gravity="center"
                 android:layout_span="2"
                 style="@style/dataStyle"
+
+                android:clickable="true"
                 />
         </TableRow>
 
@@ -112,6 +116,8 @@
                 android:gravity="center"
                 android:layout_span="2"
                 style="@style/dataStyle"
+
+                android:clickable="true"
                 />
         </TableRow>
 

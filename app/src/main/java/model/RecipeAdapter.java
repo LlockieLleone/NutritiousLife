@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -32,11 +33,13 @@ public class RecipeAdapter extends BaseAdapter {
 
     DatabaseReference RefFoodDatabase, RefFoodChild;
 
+    String urlPhoto = "";
+
     Food food;
 
-    public RecipeAdapter(Context context, ArrayList<Food> listOfRecipes) {
+    public RecipeAdapter(Context context, ArrayList<Food> listOfFoods) {
         this.context = context;
-        this.listOfFoods = listOfRecipes;
+        this.listOfFoods = listOfFoods;
     }
 
     @Override
@@ -55,7 +58,7 @@ public class RecipeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int position, View view, ViewGroup viewGroup) {
 
         View oneItem;
 
@@ -70,40 +73,21 @@ public class RecipeAdapter extends BaseAdapter {
         foodName = oneItem.findViewById(R.id.tvRecipes);
         calories = oneItem.findViewById(R.id.tvCalories);
 
-        food = (Food)getItem(i);
+        food = (Food)getItem(position);
 
         foodName.setText(food.getName());
         calories.setText(String.valueOf(food.getKcal()));
+        urlPhoto = food.getPhoto();
+
+//        Picasso
+//                .with(context)
+//                .load(urlPhoto)
+//                .placeholder(R.drawable.test)
+//                .into(photo);
 
         RefFoodDatabase = FirebaseDatabase.getInstance().getReference("food");
 
-        RefFoodChild = FirebaseDatabase.getInstance().getReference("food").child("photo");
-
-        ValueEventListener FoodListener = new ValueEventListener() {
-
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String urlPhoto = dataSnapshot.getValue().toString();
-
-                //Display the photo
-                Picasso
-                        .with(context)
-                        .load(urlPhoto)
-                        .placeholder(R.drawable.test)
-                        .into(photo);
-
-                Log.d("FIREBASE", "The photo is displayed successfully !");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        };
-
-        RefFoodChild.addListenerForSingleValueEvent(FoodListener);
+        RefFoodChild = RefFoodDatabase.child(food.getName());
 
         return oneItem;
     }

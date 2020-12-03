@@ -48,7 +48,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     String selection = "";
     Context HomeContext = this;
 
-    String TotalBreakfast, TotalLunch, TotalDinner;
+    String TotalBreakfast = "", TotalLunch = "", TotalDinner = "";
+
+
 
 
     DatabaseReference userDatabase, userChild, foodDatabase, SpecificfoodChild;
@@ -84,6 +86,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         btnAddManual = findViewById(R.id.btnAddManual);
         editTextFoodNameByUser = findViewById(R.id.editTextFoodNameByUser);
         editTextCaloriesByUser = findViewById(R.id.editTextCaloriesByUser);
+
+//        btnAddManual.setOnClickListener(this);
+//        btnAddSearch.setOnClickListener(this);
+//        btnCalculator.setOnClickListener(this);
+//        btnLogout.setOnClickListener(this);
+//
+        textViewDinner.setOnClickListener(this);
+        textViewLunch.setOnClickListener(this);
+        textViewBreakfast.setOnClickListener(this);
     }
 
     @Override
@@ -126,7 +137,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
     private void ShowDetailList(String time){
 
-        Intent intent = new Intent(HomeContext, Calculator.class);
+        Intent intent = new Intent(HomeContext, Recipe.class);
 
         if(time == "breakfast"){
             intent.putExtra("foodname", TotalBreakfast);
@@ -211,16 +222,16 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
                                     if (selection.equals("Breakfast")) {
                                         userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(tmpFood);
-                                        textViewBreakfast.append(foodname + "\n" + kcal);
-                                        TotalBreakfast += foodname + ",";
+                                        textViewBreakfast.append(foodname + " " + kcal + " Kcal" + "\n");
+                                        TotalBreakfast = TotalBreakfast + foodname + ",";
                                     } else if (selection.equals("Lunch")) {
                                         userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(tmpFood);
-                                        textViewLunch.append(foodname + "\n" + kcal);
-                                        TotalLunch += foodname + ",";
+                                        textViewLunch.append(foodname + " " + kcal + " Kcal" + "\n");
+                                        TotalLunch = TotalLunch + foodname + ",";
                                     } else if (selection.equals("Dinner")) {
                                         userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(tmpFood);
-                                        textViewDinner.append(foodname + "\n" + kcal);
-                                        TotalDinner += foodname + ",";
+                                        textViewDinner.append(foodname + " " + kcal + " Kcal" + "\n");
+                                        TotalDinner = TotalDinner + foodname + ",";
                                     }
                                 }
 
@@ -279,16 +290,16 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
             if (selection.equals("Breakfast")) {
                 userDatabase.child(userId).child("foodlog").child("breakfast").child(key).setValue(food);
-                textViewBreakfast.append(food.getName() + "\n" + food.getKcal());
-                TotalBreakfast += food.getName() + ",";
+                textViewBreakfast.append(food.getName() + " " + food.getKcal() + " Kcal" + "\n");
+                TotalBreakfast = TotalBreakfast + food.getName() + ",";
             } else if (selection.equals("Lunch")) {
                 userDatabase.child(userId).child("foodlog").child("lunch").child(key).setValue(food);
-                textViewLunch.append(food.getName() + "\n" + food.getKcal());
-                TotalLunch += food.getName() + ",";
+                textViewLunch.append(food.getName() + " " + food.getKcal() + " Kcal" + "\n");
+                TotalLunch = TotalLunch + food.getName() + ",";
             } else if (selection.equals("Dinner")) {
                 userDatabase.child(userId).child("foodlog").child("dinner").child(key).setValue(food);
-                textViewDinner.append(food.getName() + "\n" + food.getKcal());
-                TotalDinner += food.getName() + ",";
+                textViewDinner.append(food.getName() + " " + food.getKcal() + " Kcal" + "\n");
+                TotalDinner = TotalDinner +  food.getName() + ",";
             }
 
         }catch (Exception e){

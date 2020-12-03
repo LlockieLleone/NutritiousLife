@@ -12,6 +12,7 @@
         <activity android:name=".Calculator"></activity>
         <activity android:name=".Register" />
         <activity android:name=".Home" />
+        <activity android:name=".Recipe"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
